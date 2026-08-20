@@ -1,8 +1,5 @@
 name: 'Require PR Confidence Label'
-description: >-
-  Requires that a pull request carries exactly one confidence-level label
-  (e.g. confidence:low, confidence:medium, confidence:high), so reviewers
-  know how carefully the author believes the patch needs to be checked.
+description: 'Require exactly one confidence-level label (low/medium/high) on a pull request before it can be reviewed.'
 author: 'andrew222651'
 branding:
   icon: 'shield'
