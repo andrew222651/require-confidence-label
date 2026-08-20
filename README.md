@@ -56,3 +56,5 @@ See [`examples/require-confidence-label.yml`](examples/require-confidence-label.
 This only supports a single confidence label for the whole PR. If an author
 is confident about part of a patch but not another part, this scheme can't
 express that.
+
+Yo.
