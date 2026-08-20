@@ -1,7 +1,7 @@
 # Require PR Confidence Label
 
 A GitHub Action that requires a pull request to carry exactly one
-confidence-level label before it can be considered reviewed, e.g.:
+confidence-level label, e.g.:
 
 * `confidence:low` — I would be surprised if this code doesn't have problems
 * `confidence:medium` — I don't have a strong belief either way
