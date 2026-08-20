@@ -1,0 +1,53 @@
+name: 'Require PR Confidence Label'
+description: >-
+  Requires that a pull request carries exactly one confidence-level label
+  (e.g. confidence:low, confidence:medium, confidence:high), so reviewers
+  know how carefully the author believes the patch needs to be checked.
+author: 'andrew222651'
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+inputs:
+  labels:
+    description: >-
+      Comma-separated list of confidence labels, exactly one of which must
+      be present on the pull request.
+    required: false
+    default: 'confidence:low, confidence:medium, confidence:high'
+  mode:
+    description: 'Matching mode passed to the underlying label check (exactly, minimum, maximum).'
+    required: false
+    default: 'exactly'
+  count:
+    description: 'Number of matching labels required.'
+    required: false
+    default: '1'
+  message:
+    description: 'Message shown when the check fails.'
+    required: false
+    default: 'Label error. Requires exactly one of: [{{ provided }}]. Add a confidence label and re-run this check.'
+  token:
+    description: 'Token used to read PR labels. Defaults to the workflow token.'
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  labels:
+    description: 'The labels that were matched, as a comma-separated string.'
+    value: ${{ steps.check.outputs.labels }}
+  status:
+    description: 'The status of the check.'
+    value: ${{ steps.check.outputs.status }}
+
+runs:
+  using: 'composite'
+  steps:
+    - id: check
+      uses: mheap/github-action-required-labels@v3
+      with:
+        mode: ${{ inputs.mode }}
+        count: ${{ inputs.count }}
+        labels: ${{ inputs.labels }}
+        message: ${{ inputs.message }}
+        token: ${{ inputs.token }}

@@ -1,0 +1,23 @@
+name: Test action
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate-metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate action.yml is well-formed YAML
+        run: python3 -c "import yaml; yaml.safe_load(open('action.yml'))"
+
+  self-check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

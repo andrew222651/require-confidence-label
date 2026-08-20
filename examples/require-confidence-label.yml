@@ -1,0 +1,10 @@
+name: Require PR confidence level label
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize]
+
+jobs:
+  confidence-label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: andrew222651/require-confidence-label@v1
